@@ -3,7 +3,10 @@
 > Log suid binaries and enforce per-uid suid policy.
 
 `suidsnoop` is a tool for logging whenever a suid binary is executed on your system and
-optionally enforcing a per-uid policy for suid binaries.
+optionally enforcing a per-uid policy for suid binaries. `suidnsoop` is built using eBPF
+LSM programs and is written in pure Rust using the [Aya][aya] library.
+
+[aya]: https://github.com/aya-rs/aya
 
 ## Prerequisites
 
