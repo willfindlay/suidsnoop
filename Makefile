@@ -18,14 +18,18 @@ build: $(DEBUG)
 
 .PHONY: run
 run: $(DEBUG)
-	$(RUNNER) ./$(DEBUG) --path $(DEBUG_BPF) $(RUN_ARGS)
+	$(RUNNER) ./$(DEBUG) $(RUN_ARGS)
 
 .PHONY: build-release
 build-release: $(RELEASE)
 
 .PHONY: run-release
 run-release: $(RELEASE)
-	$(RUNNER) ./$(RELEASE) --path $(RELEASE_BPF) $(RUN_ARGS)
+	$(RUNNER) ./$(RELEASE) $(RUN_ARGS)
+
+.PHONY: install
+install: $(RELEASE)
+	$(CARGO) install --path suidsnoop
 
 .PHONY: clean
 clean:
