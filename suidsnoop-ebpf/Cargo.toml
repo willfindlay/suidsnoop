@@ -22,3 +22,11 @@ panic = "abort"
 
 [workspace]
 members = []
+
+# TODO delete this when my patch is merged upstream
+[patch.crates-io]
+aya-bpf = {git = "https://github.com/willfindlay/aya", branch = "arguments"}
+
+# TODO delete this when my patch is merged upstream
+[patch."http://github.com/aya-rs/aya"]
+aya-bpf = {git = "https://github.com/willfindlay/aya", branch = "arguments"}
