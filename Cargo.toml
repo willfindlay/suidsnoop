@@ -1,0 +1,2 @@
+[workspace]
+members = ["suidsnoop", "suidsnoop-common", "xtask"]
