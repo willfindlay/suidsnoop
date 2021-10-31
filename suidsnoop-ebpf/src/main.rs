@@ -89,8 +89,12 @@ unsafe fn submit_event(
     event.uid = uid;
     event.gid = gid;
     event.denied = denied;
+    let len =
+        bpf_probe_read_str((*bprm).filename as *const _, &mut event.path).map_err(|e| e as i32)?;
+    if len < event.path.len() {
+        event.path[len] = 0u8;
+    }
 
-    bpf_probe_read_str((*bprm).filename as *const _, &mut event.path).map_err(|e| e as i32)?;
     EVENTS.output(ctx, event, 0);
 
     Ok(())
