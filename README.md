@@ -1,28 +1,43 @@
 # suidsnoop
 
+> Log suid binaries and enforce per-uid suid policy.
+
+`suidsnoop` is a tool for logging whenever a suid binary is executed on your system and
+optionally enforcing a per-uid policy for suid binaries.
+
 ## Prerequisites
 
 1. Install a rust stable toolchain: `rustup install stable`
 1. Install a rust nightly toolchain: `rustup install nightly`
 1. Install bpf-linker: `cargo install bpf-linker`
 
-## Build eBPF
+## Build and Install
 
 ```bash
-cargo xtask build-ebpf
+git clone https://github.com/willfindlay/suidsnoop && cd suidsnoop
+make install
 ```
 
-To perform a release build you can use the `--release` flag.
-You may also change the target architecture with the `--target` flag
+Make sure `$HOME/.cargo/bin` is in your `$PATH`!
 
-## Build Userspace
+## Examples
 
+Log all attempts to run suid binaries:
 ```bash
-cargo build
+sudo suidsnoop
 ```
 
-## Run
-
+Allow uid 1000 and deny all others:
 ```bash
-sudo target/debug/suidsnoop --path target/bpfel-unknown-none/debug/suidsnoop
+sudo suidsnoop -u 1000
+```
+
+Deny uid 1001 and allow all others:
+```bash
+sudo suidsnoop -U 1001
+```
+
+Do a dry run of a policy:
+```bash
+sudo suidsnoop -U 1001 -d
 ```
